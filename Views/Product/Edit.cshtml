@@ -1,0 +1,107 @@
+﻿@model Inventory_Manager.Models.Product
+@{
+
+    string currentModel = Helper.GetTypeName(Model.GetType().ToString());
+    ViewData["Title"] = currentModel + " - Edit";
+}
+<style>
+    .form-group, btn-group
+    {
+        margin-top:10px;
+    }
+</style>
+
+<div class="col-11 mx-auto pt-0 p-0">
+    <div class="card">
+        <div class="card-header bg-secondary text-uppercase text-white text-center" style="height:40px">
+            <h5>Edit Product</h5>
+        </div>
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div class="btn-group">
+                <div class="col-8">
+                    <div class="row m-2">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group col-6 ">
+                            <label asp-for="Code" class="control-label"></label>
+                            <input asp-for="Code" class="form-control" readonly  />
+                            <span asp-validation-for="Code" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control"  />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="Description" class="control-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="Cost" class="control-label"></label>
+                            <input asp-for="Cost" class="form-control"  />
+                            <span asp-validation-for="Cost" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="Price" class="control-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="UnitId" class="control-label"></label>
+                            <select asp-for="UnitId" class="form-control" asp-items="@ViewBag.Units" ></select>
+                            <span asp-validation-for="UnitId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label asp-for="BrandId" class="control-label"></label>
+                            <select asp-for="BrandId" class="form-control" asp-items="@ViewBag.Brands" ></select>
+                            <span asp-validation-for="BrandId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="CategoryId" class="control-label"></label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.Category"></select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="ProductProfileId" class="control-label"></label>
+                            <select asp-for="ProductProfileId" class="form-control" asp-items="@ViewBag.ProductProfile" ></select>
+                            <span asp-validation-for="ProductProfileId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label asp-for="ProductGroupId" class="control-label"></label>
+                            <select asp-for="ProductGroupId" class="form-control" asp-items="@ViewBag.ProductGroup"></select>
+                            <span asp-validation-for="ProductGroupId" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-4 row">
+                    <div class="form-group col-12 justify-content-center align-middle mb-0 pb-0">
+                        <img id="PreviewPhoto" src="~/Images/@Model.PhotoUrl" alt="Logo Image" width="300" height="300" style="border:1px; margin-top:30px;" />
+                    </div>
+                    <div class="form-group col-2 pt-0 mt-0"></div>
+
+                    <input type="hidden" asp-for="@Model.PhotoUrl" />
+
+                    <div class="form-group col-10 pt-0 mt-0">
+                        <div class="custom-file mt-1">
+                            <input type="file" asp-for="ProductPhote" class="custom-file-input" id="custom-file"
+                                   onchange="document.getElementById('PreviewPhoto').src=window.URL.createObjectURL(this.files[0])" />
+                            <label class="custom-file-label" for="customFile">@Model.BriefPhotoName</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group btn-gorup col-10 text-center m-2">
+                <input type="submit" value="Update"  class="btn btn-success" />
+                <a class="btn btn-secondary" asp-action="Index" asp-route-pg="@TempData["CurrentPage"]">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

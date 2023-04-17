@@ -1,0 +1,125 @@
+﻿@using dotnetsorting.Tools;
+@model IEnumerable<Inventory_Manager.Models.Supplier>
+
+@{
+    string currentModel = Helper.GetTypeName(Model.GetType().ToString());
+    ViewData["Title"] = currentModel + " - Index";
+
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+}
+
+
+<div class="container-fluid btn-group">
+    <div class="col-10">
+        <h3>@ViewData["Title"]</h3>
+    </div>
+    <div class="col-2 justify-content-end">
+        <p>
+            <a asp-action="Create" class="btn btn-success">Create New</a>
+
+        </p>
+
+    </div>
+
+</div>
+<br />
+
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager" />
+    </div>
+</div>
+<table class="table table-bordered text-center mt-2">
+    <thead>
+        <tr>
+            <th>
+                <i class="@sortModel.GetColumn("code").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("code").SortExpression">
+                @Html.DisplayNameFor(model => model.Code)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("name").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("name").SortExpression">
+                @Html.DisplayNameFor(model => model.Name)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("Email").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("Email").SortExpression">
+                    @Html.DisplayNameFor(model => model.Email)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("PhoneNo").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("PhoneNo").SortExpression">
+                    @Html.DisplayNameFor(model => model.PhoneNo)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("Address").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("Address").SortExpression">
+                    @Html.DisplayNameFor(model => model.Address)
+                </a>
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                 <td>
+                @Html.DisplayFor(modelItem => item.PhoneNo)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info btn-sm">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success btn-sm">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        function openSuccessModal(strMessage)
+        {
+            var myDiv =document.getElementById("MyModalSuccessAlertBody")
+            myDiv.innerHTML=strMessage;
+            $('#myModalSuccess').modal('show');
+
+        }
+        $(document).ready(function()
+        {
+            var errmsg = "@TempData["ErrorMessage"]";
+            if (errmsg)
+                openErrorModal(errmsg);
+
+            var msg = "@TempData["SuccessMessage"]" ;
+            if(msg)
+            openSuccessModal(msg);
+           
+        });
+    </script>
+}
