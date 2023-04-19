@@ -18,5 +18,8 @@ namespace InventoryManger.Data
         public DbSet<ProductProfile> ProductProfiles { get; set; }
         public DbSet<Product> Grossary { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Currency> Currency { get; set; }
+        public DbSet<Currencies> Currencies { get; set; }
+        
     }
 }
