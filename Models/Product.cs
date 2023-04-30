@@ -50,12 +50,12 @@ namespace Inventory_Manager.Models
             public int ProductProfileId { get; set; }
             public ProductProfile ProductProfile { get; set; }
 
-        public string PhotoUrl { get; set; } = "noimg.png";
+            public string PhotoUrl { get; set; } = "noimg.png";
             [Display(Name="Product Photo")]
             [NotMapped]
             public IFormFile ProductPhote { get; set; }
 
-        [NotMapped]
+           [NotMapped]
            public string BriefPhotoName { get; set; }
 
     }

@@ -67,6 +67,7 @@ namespace InventoryManger.Controllers
             ViewBag.Category = GetCategories();
             ViewBag.ProductProfile = GetProductProfile();
             ViewBag.ProductGroup = GetProductGroup();
+            TempData.Keep();
             return View(items);
         }
         [HttpPost]
@@ -332,6 +333,7 @@ namespace InventoryManger.Controllers
         private string GetUploadFileName(Product product)
         {
             string uniquefilename = null;
+
             if(product.ProductPhote!=null)
             {
                 string uploadFolder = Path.Combine(_henv.WebRootPath, "Images");
